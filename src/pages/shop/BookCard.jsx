@@ -31,26 +31,13 @@ const BookCard = ({ book, onDelete}) => {
         </p>
         <div className="flex items-center justify-between">
           <p className="text-amber-500 font-medium">
-            $ {book?.price.toFixed(2)} USD
+          {(book?.price * 121.25).toFixed(2)} TK
           </p>
-          <div className="flex space-x-2">
-            <Link 
-              to={`/books/edit/${book._id}`}
-              className="text-gray-400 hover:text-gray-600"
-            >
-              Edit
-            </Link>
-            <button 
-              onClick={() => onDelete(book._id)}
-              className="text-gray-400 hover:text-red-500"
-            >
-              Delete
-            </button>
-          </div>
+    
         </div>
       </div>
     </div>
   );
 };
 
-export default BookCard; 
+export default BookCard;  
