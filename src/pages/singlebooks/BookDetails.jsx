@@ -72,7 +72,7 @@ const BookDetails = () => {
           {/* Price and Genre */}
           <div className="space-y-2">
             <p className="text-2xl font-bold text-amber-500">
-              ${currentBook.price?.toFixed(2)} USD
+              {(currentBook.price * 121.25).toFixed(2)} TK
             </p>
             <p className="text-gray-600">
               Genre: <span className="text-gray-900">{currentBook.genre}</span>
@@ -98,12 +98,7 @@ const BookDetails = () => {
               <FaShoppingCart className="mr-2" />
               Add to Cart
             </button>
-            <Link 
-              to={`/books/edit/${currentBook._id}`}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Edit Book
-            </Link>
+            
           </div>
 
           {/* Additional Details */}
