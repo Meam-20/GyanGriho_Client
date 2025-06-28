@@ -21,7 +21,48 @@ const BookDetails = () => {
       </div>
     );
   }
+const handleAddToCart = () => {
+  //  let cart = localStorage.getItem("cart");
+  // cart = cart ? JSON.parse(cart) : [];
+  // console.log({cart});
+  // // Check if item already exists
+  // if(cart.length === 0) {
+  //   // If cart is empty, add the item with quantity 1
+  //   cart.push({ ...currentBook, quantity: 1 });
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  //   return;
+  // }
+  // const existingIndex = cart.findIndex(i => i._id === currentBook._id);
+  // console.log({existingIndex});
+  // if (existingIndex >= 0) {
+  //   // If already in cart, increase quantity
+  //   cart[existingIndex].quantity += 1;
+  // } else if(existingIndex === -1) {
+  //   // Otherwise add new item with quantity 1
+  //   return ;
+  // }else{
+  //   cart.push({ ...item, quantity: 1 });
+  // }
 
+  // // Save back to localStorage
+  // localStorage.setItem("cart", JSON.stringify(cart));
+    let cart = localStorage.getItem("cart");
+  cart = cart ? JSON.parse(cart) : [];
+
+  // Check if item already exists
+  const existingIndex = cart.findIndex(i => i._id === currentBook._id);
+
+  if (existingIndex >= 0) {
+    // If already in cart, increase quantity
+    cart[existingIndex].quantity += 1;
+  } else {
+    // Otherwise add new item with quantity 1
+    cart.push({ ...currentBook, quantity: 1 });
+  }
+
+  // Save back to localStorage
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -94,7 +135,7 @@ const BookDetails = () => {
 
           {/* Action Buttons */}
           <div className="flex space-x-4 pt-6">
-            <button className=" bg-amber-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-600 transition-colors flex items-center justify-center">
+            <button onClick={handleAddToCart} className=" bg-amber-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-600 transition-colors flex items-center justify-center">
               <FaShoppingCart className="mr-2" />
               Add to Cart
             </button>
