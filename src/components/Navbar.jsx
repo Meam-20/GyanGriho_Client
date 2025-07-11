@@ -9,13 +9,14 @@ import { Bounce, toast } from "react-toastify";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logOutUser } = useContext(AuthContext);
-
+  const  [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/books", label: "Shop" },
     { to: "/ebooks", label: "Ebooks" },
     { to: "/membership", label: "Membership" },
-    { to: "/books/add", label: "Add Book" },
   ];
 
   const handleLogout = () => {
@@ -47,7 +48,7 @@ const Navbar = () => {
             to="/"
             className="text-xl font-bold uppercase tracking-wider"
           >
-            Gyan<span className="text-amber-500">Griho</span>
+            Gyan<span className="text-amber-500">Griho.</span>
           </NavLink>
 
           {/* Navigation Links */}
@@ -70,13 +71,14 @@ const Navbar = () => {
           </div>
 
           {/* Right Side Icons */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4  ">
             {/* Cart Icon */}
             <NavLink
-              to="/cart"
-              className="bg-black text-white p-2 rounded-full hover:bg-gray-800 transition-colors"
+              to="/user/cart"
+              className="bg-black relative text-white p-2 rounded-full hover:bg-gray-800 transition-colors"
             >
-              <FaShoppingCart className="h-5 w-5" />
+              <FaShoppingCart className="h-8 w-8" />
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white p-2 rounded-full">{cart.length}</span>
             </NavLink>
 
             <div className="navbar-end gap-4">
@@ -86,8 +88,9 @@ const Navbar = () => {
                     data-tooltip-id="my-tooltip"
                     data-tooltip-place="top"
                     src={user?.photoURL}
-                    className=" w-10 md:w-12 h-10 md:h-12 object-cover rounded-full"
-                    alt=""
+                    referrerPolicy="no-referrer"
+                    className=" w-10 md:w-12 h-10 md:h-12 object-fill rounded-full"
+                    alt="logo"
                   />
                   <Tooltip id="my-tooltip" className="z-10">
                     <div className="text-center">
